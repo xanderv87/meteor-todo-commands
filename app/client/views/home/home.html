@@ -1,0 +1,48 @@
+<template name="home">
+    <div class="row">
+        <input id="new-todo" placeholder="What needs to be done?" autofocus="">
+        <button class="create"><i class="fa fa-plus"></i></button>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            {{#each todos}}
+                {{> todo}}
+            {{/each}}
+        </div>
+        <div class="col-md-6">
+            {{#each eventList}}
+                {{> event}}
+            {{/each}}
+        </div>
+    </div>
+
+
+</template>
+
+<template name="todo">
+    <div class="row {{#if completed}}completed{{/if}}{{#if todo_editing}}editing{{/if}}">
+
+        <div class="col-md-1">
+            <input class="toggle" type="checkbox" {{#if completed}}checked="checked"{{/if}}>
+        </div>
+        <div class="col-md-10">
+            <div class="form-group">
+            {{title}}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="destroy"><i class="fa fa-crosshairs"></i></button>
+        </div>
+    </div>
+</template>
+<template name="event">
+    <ul>
+        <li>
+            {{executedAt}}
+            {{command.name}}
+        </li>
+    </ul>
+
+
+</template>

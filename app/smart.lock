@@ -1,0 +1,72 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "iron-router": {},
+      "accounts-entry": {},
+      "handlebars-server": {},
+      "collection2": {},
+      "collection-helpers": {},
+      "flash-messages": {},
+      "bootstrap3-less": {},
+      "simple-form": {}
+    },
+    "packages": {
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.6.4",
+        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
+      },
+      "accounts-entry": {
+        "git": "https://github.com/BeDifferential/accounts-entry.git",
+        "tag": "v0.6.2",
+        "commit": "56c9b6c064cc0d92a97aa9b53a8f4da050f54c29"
+      },
+      "handlebars-server": {
+        "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
+        "tag": "v1.2.0",
+        "commit": "1b72c4e9d82af66293e50be4516c487d15d97464"
+      },
+      "collection2": {
+        "git": "https://github.com/aldeed/meteor-collection2.git",
+        "tag": "v0.3.8",
+        "commit": "69aff2a21ba3c382f915e1f9dbcca2ad38edb6d5"
+      },
+      "collection-helpers": {
+        "git": "https://github.com/dburles/meteor-collection-helpers.git",
+        "tag": "v0.2.3",
+        "commit": "52c4c692421acea557fb329f43f65ed11b4832df"
+      },
+      "flash-messages": {
+        "git": "https://github.com/camilosw/flash-messages.git",
+        "tag": "v0.2.3",
+        "commit": "fdebd773753682e168af47a1d2ffc1da47e1ce49"
+      },
+      "bootstrap3-less": {
+        "git": "https://github.com/eprochasson/bootstrap3-less",
+        "tag": "v0.1.9",
+        "commit": "5c812c4d7ce72917a065f0424c3cf54e5ff2d16a"
+      },
+      "simple-form": {
+        "git": "https://github.com/BeDifferential/simple-form.git",
+        "tag": "v0.0.20",
+        "commit": "fdba8e6604bfd71668304561a4fe6db3295bd1e9"
+      },
+      "just-i18n": {
+        "git": "https://github.com/subhog/meteor-just-i18n.git",
+        "tag": "v0.1.1",
+        "commit": "ce88ac66c0dc107dc2da93ce152616115838101f"
+      },
+      "accounts-t9n": {
+        "git": "https://github.com/softwarerero/meteor-accounts-t9n.git",
+        "tag": "v0.0.2",
+        "commit": "408e3a037114cb72163073110e2121e3d548c1a2"
+      },
+      "simple-schema": {
+        "git": "https://github.com/aldeed/meteor-simple-schema.git",
+        "tag": "v0.2.40",
+        "commit": "d22892daa943e3567916effeaafd794ca6af5cd2"
+      }
+    }
+  }
+}

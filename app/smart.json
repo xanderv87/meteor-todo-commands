@@ -1,0 +1,12 @@
+{
+  "packages": {
+    "iron-router": {},
+    "accounts-entry": {},
+    "handlebars-server": {},
+    "collection2": {},
+    "collection-helpers": {},
+    "flash-messages": {},
+    "bootstrap3-less": {},
+    "simple-form": {}
+  }
+}
