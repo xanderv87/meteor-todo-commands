@@ -1,30 +1,38 @@
 class @CreateTodo extends Command
-  constructor: (@title) ->
+  constructor: () ->
     @name = "CreateTodo"
     super
 
-  execute: () ->
+
+  _execute: () ->
     Todos.insert(
       title: @title
       user: @user,
       completed: false
     )
     super
+Command.registerCommand("CreateTodo", @CreateTodo)
 
 class @DeleteTodo extends Command
-  constructor: (@id) ->
+  constructor: () ->
     @name = "DeleteTodo"
     super
-
-  execute: () ->
+  allowed: () ->
+    todo = Todos.findOne(@id)
+    todo.user == @user
+  _execute: () ->
     Todos.remove(@id)
     super
+Command.registerCommand("DeleteTodo", @DeleteTodo)
 
 class @UpdateTodo extends Command
-  constructor: (@id, @updates) ->
+  constructor: () ->
     @name = "UpdateTodo"
     super
-
-  execute: () ->
+  allowed: () ->
+    false
+  _execute: () ->
     Todos.update(@id, $set: @updates)
     super
+
+Command.registerCommand("UpdateTodo", @UpdateTodo)
