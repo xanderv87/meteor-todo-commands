@@ -11,7 +11,6 @@ class @TodoCreated extends EventHandler
       user: data.user,
       completed: false
     )
-    [id]
 
 
 Command.register("CreateTodo", @CreateTodo)
@@ -21,7 +20,7 @@ EventHandler.register("TodoCreated", @TodoCreated)
 class @UpdateTodo extends Command
 
   allowed: () ->
-    todo = Todos.findOne(@data.id)
+    todo = Todos.findOne({key: @data.key})
     todo.user == @user
 
   execute: () ->
@@ -31,8 +30,8 @@ class @UpdateTodo extends Command
 
 class @TodoUpdated extends EventHandler
   execute: (data) ->
-    Todos.update(data.id, $set: data.updates)
-    [@id]
+    Todos.update({key: data.key}, $set: data.updates)
+
 
 Command.register("UpdateTodo", @UpdateTodo)
 EventHandler.register("TodoUpdated", @TodoUpdated)
@@ -40,17 +39,14 @@ EventHandler.register("TodoUpdated", @TodoUpdated)
 
 class @TodoUpdatedPlus extends EventHandler
   execute: (data) ->
-    console.log "TodoUpdatedPlus"
-    console.log todoCountId
     TodoCount.update(todoCountId, $inc: {count: 1})
-    console.log TodoCount.findOne(todoCountId)
 
 EventHandler.register("TodoUpdated", @TodoUpdatedPlus)
 
 class @DeleteTodo extends Command
 
   allowed: () ->
-    todo = Todos.findOne(@data.id)
+    todo = Todos.findOne({key: @data.key})
     todo.user == @user
   execute: () ->
     if not @allowed()
@@ -59,9 +55,9 @@ class @DeleteTodo extends Command
 
 class @TodoDeleted extends EventHandler
 
-  execute: (command) ->
-    Todos.remove(command.id)
-    [command.id]
+  execute: (data) ->
+    Todos.remove({key: data.key})
+    [command.key]
 
 Command.register("DeleteTodo", @DeleteTodo)
 EventHandler.register("TodoDeleted", @TodoDeleted)

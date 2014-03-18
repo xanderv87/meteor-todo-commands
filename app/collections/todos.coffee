@@ -1,5 +1,12 @@
 @Todos = new Meteor.Collection 'todos',
   schema: new SimpleSchema(
+    key:
+      type: Number
+      index: 1
+      autoValue: () ->
+        if @isInsert
+          incrementCounter('todos')
+
     title:
       type: String,
       label: 'Title',
@@ -23,6 +30,7 @@
 )
 
 
-@TodoCount = new Meteor.Collection null
-
-@todoCountId = @TodoCount.insert({count: 0})
+@TodoCount = new Meteor.Collection 'todoCount'
+@todoCountId = ""
+if Meteor.isServer
+  @todoCountId = @TodoCount.insert({count: 0})

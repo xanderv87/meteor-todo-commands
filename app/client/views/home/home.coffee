@@ -1,7 +1,7 @@
 Template.home.rendered = ->
 
   #SEO Page Title & Description
-  document.title = "My New Meteor App"
+  document.title = "Todo Commands"
   $(
     "<meta>",
     {
@@ -23,21 +23,20 @@ Template.home.events =
     c = new CreateTodo()
     c.data =
       title: $("#new-todo").val()
-    console.log c
     executeCommand(c)
 
 Template.todo.events =
   'click button.destroy': ->
     c = new DeleteTodo()
     c.data =
-      id: @_id
+      key: @key
     executeCommand(c)
   'click i.fa': (e) ->
     c = new UpdateTodo()
     c.data =
-      id: @_id
+      key: @key
       updates: {completed: !this.completed}
     executeCommand(c)
 
 Template.event.stringify = ->
-  JSON.stringify @data
+  JSON.stringify @eventData

@@ -22,3 +22,4 @@ collection-helpers
 flash-messages
 bootstrap3-less
 simple-form
+mongo-counter

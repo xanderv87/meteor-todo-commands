@@ -7,6 +7,7 @@
     "collection-helpers": {},
     "flash-messages": {},
     "bootstrap3-less": {},
-    "simple-form": {}
+    "simple-form": {},
+    "mongo-counter": {}
   }
 }
