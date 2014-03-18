@@ -3,9 +3,6 @@
     key:
       type: Number
       index: 1
-      autoValue: () ->
-        if @isInsert
-          incrementCounter('todos')
 
     title:
       type: String,

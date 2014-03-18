@@ -2,11 +2,13 @@ class @CreateTodo extends Command
 
   execute: () ->
     @data.user = @user
+    @data.key = incrementCounter 'todos'
     @insertEvent("TodoCreated", @data)
 
 class @TodoCreated extends EventHandler
   execute: (data) ->
     id = Todos.insert(
+      key: data.key
       title: data.title
       user: data.user,
       completed: false
