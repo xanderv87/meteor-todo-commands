@@ -13,6 +13,19 @@ class @CreateTodo extends Command
     super
 Command.registerCommand("CreateTodo", @CreateTodo)
 
+class @UpdateTodo extends Command
+  constructor: () ->
+    @name = "UpdateTodo"
+    super
+  allowed: () ->
+    todo = Todos.findOne(@id)
+    todo.user == @user
+  _execute: () ->
+    Todos.update(@id, $set: @updates)
+    super
+
+Command.registerCommand("UpdateTodo", @UpdateTodo)
+
 class @DeleteTodo extends Command
   constructor: () ->
     @name = "DeleteTodo"
@@ -24,15 +37,3 @@ class @DeleteTodo extends Command
     Todos.remove(@id)
     super
 Command.registerCommand("DeleteTodo", @DeleteTodo)
-
-class @UpdateTodo extends Command
-  constructor: () ->
-    @name = "UpdateTodo"
-    super
-  allowed: () ->
-    false
-  _execute: () ->
-    Todos.update(@id, $set: @updates)
-    super
-
-Command.registerCommand("UpdateTodo", @UpdateTodo)

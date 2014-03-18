@@ -16,8 +16,10 @@ class @Command
     else
       throw new Meteor.Error("command is not allowed")
 
-Command.commands = {}
-Command.registerCommand = (name, command) ->
-  @commands[name] = command
-Command.createCommand = (command) ->
+  @commands = {}
+
+  @registerCommand = (name, command) ->
+    @commands[name] = command
+
+  @createCommand = (command) ->
     _.extend(new @commands[command.name](), command)
