@@ -4,11 +4,18 @@
       type: Date,
       label: 'Created At'
 
-    command:
-      type: Command,
-      label: 'Executed Command'
+    name:
+      type: String,
+      label: 'Event Name'
 
+    eventData:
+      type: Object
+      blackbox: true
+      label: 'Event data'
 
+    executed:
+      type: Boolean,
+      label: 'Already executed'
 
   )
 @EventStore.allow(
@@ -19,3 +26,16 @@
   remove: (userId, doc) ->
     false
 )
+
+if Meteor.isServer
+  @EventStore.find({executed: false}, {limit: 1, sort: {executedAt: -1}}).observeChanges({
+    added: (id, fields) ->
+
+      handlers = EventHandler.getEventHandlers fields.name
+
+      _.each(handlers, (handler) ->
+        (new handler()).execute(fields.eventData)
+      )
+
+      EventStore.update(id, $set: {executed: true})
+  })

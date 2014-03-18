@@ -10,7 +10,6 @@
     completed:
       type: Boolean
       label: 'Completed'
-
   )
 
 
@@ -22,3 +21,8 @@
   remove: (userId, doc) ->
     false
 )
+
+
+@TodoCount = new Meteor.Collection null
+
+@todoCountId = @TodoCount.insert({count: 0})

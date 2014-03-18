@@ -4,7 +4,3 @@
       console.log error
   )
 
-Meteor.methods(
-  executeCommand: (command) ->
-    console.log command
-)

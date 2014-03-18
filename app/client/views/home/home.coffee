@@ -21,19 +21,23 @@ Template.todo.todo_editing = ->
 Template.home.events =
   'click button.create': ->
     c = new CreateTodo()
-    c.title = $("#new-todo").val()
+    c.data =
+      title: $("#new-todo").val()
+    console.log c
     executeCommand(c)
 
 Template.todo.events =
   'click button.destroy': ->
     c = new DeleteTodo()
-    c.id= @_id
+    c.data =
+      id: @_id
     executeCommand(c)
-  'change input[type=checkbox]': (e) ->
+  'click i.fa': (e) ->
     c = new UpdateTodo()
-    c.id = @_id
-    c.updates = {completed: $(e.currentTarget)[0].checked}
+    c.data =
+      id: @_id
+      updates: {completed: !this.completed}
     executeCommand(c)
 
 Template.event.stringify = ->
-  JSON.stringify @command
+  JSON.stringify @data

@@ -24,7 +24,12 @@
     <div class="row {{#if completed}}completed{{/if}}{{#if todo_editing}}editing{{/if}}">
 
         <div class="col-md-1">
-            <input class="toggle" type="checkbox" {{#if completed}}checked="checked"{{/if}}>
+            {{#if completed}}
+                <i class="fa fa-check-square-o"></i>
+            {{else}}
+                <i class="fa fa-square-o"></i>
+            {{/if}}
+
         </div>
         <div class="col-md-10">
             <div class="form-group">
@@ -39,8 +44,9 @@
 <template name="event">
     <ul>
         <li>
-            {{executedAt}}
-            {{stringify}}
+            {{executedAt}}<br/>
+            {{executed}}<br/>
+            {{stringify}}<br/>
         </li>
     </ul>
 

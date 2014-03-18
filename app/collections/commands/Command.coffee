@@ -1,25 +1,44 @@
 class @Command
+  data: {}
+
   constructor: () ->
-    @user = Meteor.userId()
-  allowed: () ->
-    true
-  _execute: () ->
-    EventStore.insert(
+    if Meteor.isServer
+      @user = this.userId
+    else
+      @user = Meteor.userId()
+    @commandName = @.constructor.name
+
+  executeClient: () ->
+    console.log @
+
+  insertEvent: (name, eventData) ->
+    EventStore.insert
       executedAt: new Date
-      command: @
-    )
+      name: name
+      eventData: eventData
+      executed: false
+
 
 
   execute: () ->
-    if @allowed()
-      @_execute()
+    if Meteor.isServer
+      @execute()
     else
-      throw new Meteor.Error("command is not allowed")
+      @executeClient()
+
+
+# static part
 
   @commands = {}
 
-  @registerCommand = (name, command) ->
+  @register = (name, command) ->
     @commands[name] = command
 
   @createCommand = (command) ->
-    _.extend(new @commands[command.name](), command)
+    _.extend(new @commands[command.commandName](), command)
+
+Meteor.methods(
+  executeCommand: (command) ->
+    c = Command.createCommand(command)
+    c.execute()
+)
