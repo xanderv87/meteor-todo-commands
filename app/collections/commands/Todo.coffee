@@ -57,7 +57,6 @@ class @TodoDeleted extends EventHandler
 
   execute: (data) ->
     Todos.remove({key: data.key})
-    [command.key]
 
 Command.register("DeleteTodo", @DeleteTodo)
 EventHandler.register("TodoDeleted", @TodoDeleted)

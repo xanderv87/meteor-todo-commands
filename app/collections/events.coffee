@@ -28,14 +28,20 @@
 )
 
 if Meteor.isServer
-  @EventStore.find({executed: false}, {limit: 1, sort: {executedAt: -1}}).observeChanges({
-    added: (id, fields) ->
 
-      handlers = EventHandler.getEventHandlers fields.name
+  execute = (id, fields) ->
 
-      _.each(handlers, (handler) ->
-        (new handler()).execute(fields.eventData)
-      )
+    handlers = EventHandler.getEventHandlers fields.name
 
-      EventStore.update(id, $set: {executed: true})
+    _.each(handlers, (handler) ->
+      (new handler()).execute(fields.eventData)
+    )
+
+    EventStore.update(id, $set: {executed: true})
+
+  @EventStore.find({executed: false}, {limit: 1, sort: {executedAt: 1}}).observeChanges({
+    added: execute
+    changed: (id, fields) ->
+      if fields.executed
+        execute id, fields
   })

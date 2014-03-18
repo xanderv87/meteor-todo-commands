@@ -41,4 +41,12 @@ Meteor.methods(
   executeCommand: (command) ->
     c = Command.createCommand(command)
     c.execute()
+
+  deleteAll: () ->
+    Todos.remove({})
+    setCounter('todos', 0)
+    EventStore.update({}, $set: {executed:true},{ multi: true })
+
+  replayAll: () ->
+    EventStore.update({}, $set: {executed:false},{ multi: true })
 )
